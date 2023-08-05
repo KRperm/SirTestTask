@@ -1,27 +1,30 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 10f;
+    public float speed;
+    public Rigidbody2D rigidBody2d;
 
-    private Rigidbody2D Rigidbody { get; set; }
-    private Vector2 Movement { get; set; }
+    private Vector2 MovementDirection { get; set; }
 
     private void Start()
     {
-        Rigidbody = GetComponent<Rigidbody2D>();
-        Assert.IsNotNull(Rigidbody);
+        Assert.IsNotNull(rigidBody2d);
     }
 
     private void FixedUpdate()
     {
-        Rigidbody.velocity = Movement * speed * Time.deltaTime;
+        rigidBody2d.velocity = MovementDirection * speed * Time.deltaTime;
     }
 
-    public void ChangeMovement(Vector2 newMovement)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        Movement = newMovement;
+        print("a");
+    }
+
+    public void ChangeMovement(Vector2 newDirection)
+    {
+        MovementDirection = newDirection;
     }
 }

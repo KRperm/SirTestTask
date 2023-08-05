@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2520518879664144880}
   - component: {fileID: 588469565106393004}
-  - component: {fileID: 602469368652642326}
-  - component: {fileID: 2574514617702831300}
+  - component: {fileID: 5532992608470829752}
+  - component: {fileID: 877944813223738289}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,8 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f826936b0bb51d42a0f57a0b3171df3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 500
---- !u!50 &602469368652642326
+  speed: 1000
+  rigidBody2d: {fileID: 5532992608470829752}
+--- !u!50 &5532992608470829752
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -55,20 +56,20 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1106647752666491380}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!58 &2574514617702831300
+  m_Constraints: 0
+--- !u!58 &877944813223738289
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
