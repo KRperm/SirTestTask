@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1538685381558716618}
   - component: {fileID: 8209179890025886610}
   - component: {fileID: 6141841655544031225}
+  - component: {fileID: 2107044930986553485}
   m_Layer: 6
   m_Name: EnemyGround
   m_TagString: Enemy
@@ -51,15 +52,16 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   healthPoints: 50
-  speed: 10
+  speed: 100
   delayBetweenShots: 2
   projectileDamage: 0
   projectileSpawnDistance: 1.5
   projectilePrefab: {fileID: 5241964608778774924, guid: 183a7d0f012108f4b9d4735d0125b45b, type: 3}
   coinsAward: 4
-  travelDistance: 0
-  stopDuration: 0
+  travelDistance: 4.5
+  stopDuration: 3
   touchDamagePerSecond: 40
+  odometer: {fileID: 2107044930986553485}
   navigationAgent: {fileID: 6141841655544031225}
 --- !u!61 &1538685381558716618
 BoxCollider2D:
@@ -120,9 +122,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e854704e34b86544f9e0eb30e381cac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 0
   pointReachedRadius: 0.05
   rigidBody2D: {fileID: 8209179890025886610}
+--- !u!114 &2107044930986553485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5706430348023904830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96cf0afbbb2a97e4e9595987936c627c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6525617471297300105
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,6 +25,11 @@ public class NavigationTilemapAgent : MonoBehaviour
         NavigationService.PathUpdated -= NavigationService_PathUpdated;
     }
 
+    private void OnDisable()
+    {
+        rigidBody2D.velocity = Vector3.zero;
+    }
+
     private void NavigationService_PathUpdated(object sender, System.EventArgs e)
     {
         Path = NavigationService.GetPath(transform.position);
@@ -42,8 +47,8 @@ public class NavigationTilemapAgent : MonoBehaviour
             if (Path.Count != 0)
                 nextPoint = Path.Peek();
         }
-        var direction = (nextPoint - (Vector2)transform.position).normalized;
 
+        var direction = (nextPoint - (Vector2)transform.position).normalized;
         rigidBody2D.velocity = direction * speed * Time.deltaTime;
     }
 }

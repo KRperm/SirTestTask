@@ -21,7 +21,6 @@ public abstract class CharacterBase : MonoBehaviour
     {
         Assert.IsNotNull(projectilePrefab);
         healthPointsChanged.Invoke(healthPoints);
-        print("invoked");
         StartCoroutine(ContinuousShooting());
     }
 
@@ -65,7 +64,7 @@ public abstract class CharacterBase : MonoBehaviour
             yield return new WaitUntil(CanShoot);
 
             var target = GetShootTarget();
-            if (target is null)
+            if (target == null)
                 break;
 
             SpawnProjectile(target.transform.position);

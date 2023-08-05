@@ -1,27 +1,21 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class EnemyGroundController : CharacterBase
+public class EnemyGroundController : EnemyBase
 {
-    public int coinsAward;
-
-    public float travelDistance;
-    public float stopDuration;
-
-    public float touchDamagePerSecond;
-
     public NavigationTilemapAgent navigationAgent;
 
     protected override void Start()
     {
         Assert.IsNotNull(navigationAgent);
+        navigationAgent.speed = speed;
         base.Start();
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void Update()
     {
-        var playerController = collision.gameObject.GetComponent<PlayerController>();
-        playerController?.RecieveDamage(touchDamagePerSecond * Time.deltaTime);
+        navigationAgent.enabled = IsTraveling;
     }
 
     protected override void OnDeath()
@@ -29,15 +23,5 @@ public class EnemyGroundController : CharacterBase
         var player = GameObject.FindWithTag("Player");
         var playerController = player?.GetComponent<PlayerController>();
         playerController.RecieveCoins(coinsAward);       
-    }
-
-    protected override GameObject GetShootTarget()
-    {
-        return GameObject.FindWithTag("Player");
-    }
-
-    protected override bool CanShoot()
-    {
-        return true;
     }
 }
