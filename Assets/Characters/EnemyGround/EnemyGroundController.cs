@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class EnemyGroundController : CharacterBase
 {
+    public int coinsAward;
+
     public float travelDistance;
     public float stopDuration;
 
@@ -11,6 +13,13 @@ public class EnemyGroundController : CharacterBase
     {
         var playerController = collision.gameObject.GetComponent<PlayerController>();
         playerController?.RecieveDamage(touchDamagePerSecond * Time.deltaTime);
+    }
+
+    protected override void OnDeath()
+    {
+        var player = GameObject.FindWithTag("Player");
+        var playerController = player?.GetComponent<PlayerController>();
+        playerController.RecieveCoins(coinsAward);       
     }
 
     protected override GameObject GetShootTarget()

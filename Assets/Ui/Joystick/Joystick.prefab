@@ -187,7 +187,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 300}
+  m_SizeDelta: {x: 300, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1201905708195634881
 MonoBehaviour:
@@ -201,10 +201,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b398979460c4f64da98e53262d1c579, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JoystickMoved:
+  joystickMoved:
     m_PersistentCalls:
       m_Calls: []
-  Lever: {fileID: 6538878061104417892}
+  lever: {fileID: 6538878061104417892}
 --- !u!114 &2212053133788039798
 MonoBehaviour:
   m_ObjectHideFlags: 0

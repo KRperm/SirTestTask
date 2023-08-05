@@ -7,15 +7,15 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(RectTransform))]
 public class JoystickController : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
-    public JoystickMovedEvent JoystickMoved;
-    public RectTransform Lever;
+    public JoystickMovedEvent joystickMoved;
+    public RectTransform lever;
 
     private RectTransform RectTransform { get; set; }
     private float JoystickRadius { get; set; }
 
     private void Start()
     {
-        Assert.IsNotNull(Lever);
+        Assert.IsNotNull(lever);
         RectTransform = GetComponent<RectTransform>();
         Assert.IsNotNull(RectTransform);
         JoystickRadius = RectTransform.rect.width / 2;
@@ -38,9 +38,9 @@ public class JoystickController : MonoBehaviour, IDragHandler, IPointerDownHandl
 
     private void SetLeverPosition(Vector2 newPosition)
     {
-        Lever.position = Vector2.MoveTowards(RectTransform.position, newPosition, JoystickRadius);
-        var joystickPosition = Lever.localPosition / JoystickRadius;
-        JoystickMoved.Invoke(joystickPosition);
+        lever.position = Vector2.MoveTowards(RectTransform.position, newPosition, JoystickRadius);
+        var joystickPosition = lever.localPosition / JoystickRadius;
+        joystickMoved.Invoke(joystickPosition);
     }
 }
 

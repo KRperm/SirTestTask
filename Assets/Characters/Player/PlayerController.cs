@@ -1,9 +1,20 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : CharacterBase
 {
+    public CoinsChangedEvent coinsChangedEvent;
+
+    public int coins = 0;
+
     private Vector2 MovementDirection { get; set; }
 
+    protected override void Start()
+    {
+        coinsChangedEvent.Invoke(coins);
+        base.Start();
+    }
 
     private void FixedUpdate()
     {
@@ -13,6 +24,12 @@ public class PlayerController : CharacterBase
     public void ChangeMovement(Vector2 newDirection)
     {
         MovementDirection = newDirection;
+    }
+
+    public void RecieveCoins(int recievedCoins)
+    {
+        coins += recievedCoins;
+        coinsChangedEvent.Invoke(coins);
     }
 
     protected override GameObject GetShootTarget()
@@ -37,3 +54,6 @@ public class PlayerController : CharacterBase
         return MovementDirection == Vector2.zero;
     }
 }
+
+[Serializable]
+public class CoinsChangedEvent: UnityEvent<int> { }

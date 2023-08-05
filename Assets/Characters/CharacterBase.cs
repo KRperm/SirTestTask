@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Events;
 
 public abstract class CharacterBase : MonoBehaviour
 {
+    public HealthPointsChangedEvent healthPointsChanged;
+
     public float healthPoints;
     public float speed;
 
@@ -14,18 +18,30 @@ public abstract class CharacterBase : MonoBehaviour
     public Rigidbody2D rigidBody2d;
     public GameObject projectilePrefab;
 
-    private void Start()
+    protected virtual void Start()
     {
         Assert.IsNotNull(rigidBody2d);
         Assert.IsNotNull(projectilePrefab);
+        healthPointsChanged.Invoke(healthPoints);
+        print("invoked");
         StartCoroutine(ContinuousShooting());
+    }
+
+    protected virtual void OnDeath()
+    {
+        // empty
     }
 
     public void RecieveDamage(float damageAmount)
     {
-        healthPoints -= damageAmount;
+        print(damageAmount);
+        healthPoints = Mathf.Max(healthPoints - damageAmount, 0);
+        healthPointsChanged.Invoke(healthPoints);
         if (healthPoints <= 0)
+        {
+            OnDeath();
             Destroy(gameObject);
+        }
     }
 
     protected void SpawnProjectile(Vector2 targetPosition)
@@ -58,3 +74,6 @@ public abstract class CharacterBase : MonoBehaviour
         }
     }
 }
+
+[Serializable]
+public class HealthPointsChangedEvent: UnityEvent<float> { }

@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8731793444854225681}
+  - component: {fileID: 8254281068559050273}
   - component: {fileID: 1538685381558716618}
   - component: {fileID: 8209179890025886610}
-  - component: {fileID: 8254281068559050273}
   m_Layer: 6
   m_Name: EnemyGround
   m_TagString: Enemy
@@ -34,6 +34,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8254281068559050273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5706430348023904830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42ecf8bc370f67b45b7952dfd8b473eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthPointsChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  healthPoints: 50
+  speed: 10
+  delayBetweenShots: 2
+  projectileDamage: 0
+  projectileSpawnDistance: 1.5
+  rigidBody2d: {fileID: 8209179890025886610}
+  projectilePrefab: {fileID: 5241964608778774924, guid: 183a7d0f012108f4b9d4735d0125b45b, type: 3}
+  coinsAward: 4
+  travelDistance: 0
+  stopDuration: 0
+  touchDamagePerSecond: 40
 --- !u!61 &1538685381558716618
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -81,28 +107,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &8254281068559050273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5706430348023904830}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42ecf8bc370f67b45b7952dfd8b473eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthPoints: 50
-  speed: 10
-  delayBetweenShots: 2
-  projectileDamage: 0
-  projectileSpawnDistance: 1.5
-  rigidBody2d: {fileID: 8209179890025886610}
-  projectilePrefab: {fileID: 5241964608778774924, guid: 183a7d0f012108f4b9d4735d0125b45b, type: 3}
-  travelDistance: 0
-  stopDuration: 0
-  touchDamagePerSecond: 10
 --- !u!1 &6525617471297300105
 GameObject:
   m_ObjectHideFlags: 0
