@@ -1,21 +1,9 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.Assertions;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : CharacterBase
 {
-    public float speed;
-    public Rigidbody2D rigidBody2d;
-    public GameObject projectilePrefab;
-
     private Vector2 MovementDirection { get; set; }
 
-    private void Start()
-    {
-        Assert.IsNotNull(rigidBody2d);
-        Assert.IsNotNull(projectilePrefab);
-        StartCoroutine(ContinuousShooting());
-    }
 
     private void FixedUpdate()
     {
@@ -27,14 +15,25 @@ public class PlayerController : MonoBehaviour
         MovementDirection = newDirection;
     }
 
-    private IEnumerator ContinuousShooting()
+    protected override GameObject GetShootTarget()
     {
-        while (true)
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        var distanceToClosestEnemy = float.PositiveInfinity;
+        GameObject closestEnemy = null;
+        foreach (var enemy in enemies)
         {
-            yield return new WaitForSeconds(1);
-            yield return new WaitWhile(() => rigidBody2d.velocity != Vector2.zero);
-            print("a");
-            Instantiate(projectilePrefab, transform.position, transform.rotation);
+            var distance = Vector3.Distance(transform.position, enemy.transform.position);
+            if (distanceToClosestEnemy > distance)
+            {
+                distanceToClosestEnemy = distance;
+                closestEnemy = enemy;
+            }
         }
+        return closestEnemy;
+    }
+
+    protected override bool CanShoot()
+    {
+        return MovementDirection == Vector2.zero;
     }
 }
