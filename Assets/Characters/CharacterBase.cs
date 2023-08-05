@@ -15,12 +15,10 @@ public abstract class CharacterBase : MonoBehaviour
     public float projectileDamage;
     public float projectileSpawnDistance;
 
-    public Rigidbody2D rigidBody2d;
     public GameObject projectilePrefab;
 
     protected virtual void Start()
     {
-        Assert.IsNotNull(rigidBody2d);
         Assert.IsNotNull(projectilePrefab);
         healthPointsChanged.Invoke(healthPoints);
         print("invoked");

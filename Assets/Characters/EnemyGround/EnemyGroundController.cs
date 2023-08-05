@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class EnemyGroundController : CharacterBase
 {
@@ -8,6 +9,14 @@ public class EnemyGroundController : CharacterBase
     public float stopDuration;
 
     public float touchDamagePerSecond;
+
+    public NavigationTilemapAgent navigationAgent;
+
+    protected override void Start()
+    {
+        Assert.IsNotNull(navigationAgent);
+        base.Start();
+    }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -29,6 +38,6 @@ public class EnemyGroundController : CharacterBase
 
     protected override bool CanShoot()
     {
-        return rigidBody2d.velocity == Vector2.zero;
+        return true;
     }
 }

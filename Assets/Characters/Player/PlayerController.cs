@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Events;
 
 public class PlayerController : CharacterBase
@@ -7,11 +8,13 @@ public class PlayerController : CharacterBase
     public CoinsChangedEvent coinsChangedEvent;
 
     public int coins = 0;
+    public Rigidbody2D rigidBody2d;
 
     private Vector2 MovementDirection { get; set; }
 
     protected override void Start()
     {
+        Assert.IsNotNull(rigidBody2d);
         coinsChangedEvent.Invoke(coins);
         base.Start();
     }

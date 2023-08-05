@@ -46,13 +46,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f826936b0bb51d42a0f57a0b3171df3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthPointsChanged:
+    m_PersistentCalls:
+      m_Calls: []
   healthPoints: 100
   speed: 1000
   delayBetweenShots: 0.5
-  projectileDamage: 10
+  projectileDamage: 0
   projectileSpawnDistance: 1.5
-  rigidBody2d: {fileID: 5532992608470829752}
   projectilePrefab: {fileID: 5241964608778774924, guid: 183a7d0f012108f4b9d4735d0125b45b, type: 3}
+  coinsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  coins: 0
+  rigidBody2d: {fileID: 5532992608470829752}
 --- !u!50 &5532992608470829752
 Rigidbody2D:
   serializedVersion: 4
