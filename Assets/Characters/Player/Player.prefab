@@ -52,7 +52,7 @@ MonoBehaviour:
   healthPoints: 100
   speed: 1000
   delayBetweenShots: 0.5
-  projectileDamage: 0
+  projectileDamage: 10
   projectileSpawnDistance: 1.5
   projectilePrefab: {fileID: 5241964608778774924, guid: 183a7d0f012108f4b9d4735d0125b45b, type: 3}
   coinsChangedEvent:

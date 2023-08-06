@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 2505710857929406873}
   m_Layer: 7
   m_Name: EnemyAir
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,13 +135,13 @@ MonoBehaviour:
   healthPoints: 100
   speed: 100
   delayBetweenShots: 3
-  projectileDamage: 0
+  projectileDamage: 10
   projectileSpawnDistance: 1.5
   projectilePrefab: {fileID: 5241964608778774924, guid: 183a7d0f012108f4b9d4735d0125b45b, type: 3}
   coinsAward: 7
   travelDistance: 4.5
   stopDuration: 4
-  touchDamagePerSecond: 30
+  touchDamagePerSecond: 50
   odometer: {fileID: 2505710857929406873}
   rigidBody2D: {fileID: 4149421535485088348}
 --- !u!61 &3795094268266477303
@@ -203,4 +203,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96cf0afbbb2a97e4e9595987936c627c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugPrint: 1

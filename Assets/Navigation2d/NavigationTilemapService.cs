@@ -16,7 +16,7 @@ public class NavigationTilemapService : MonoBehaviour
     private Dictionary<Vector3Int, int> TileWeightTable { get; } = new Dictionary<Vector3Int, int>();
     private Vector3Int GoalCellPosition { get; set; }
 
-    private void Start()
+    private void Awake()
     {
         Assert.IsNotNull(goal);
         Assert.IsNotNull(tilemap);
@@ -35,6 +35,14 @@ public class NavigationTilemapService : MonoBehaviour
             GoalCellPosition = currentGoalPosition;
             RunPathfinding(GoalCellPosition);
         }
+    }
+
+    public List<Vector3> GetPositionsWithWeight(int filterWeight)
+    {
+        return TileWeightTable
+            .Where(x => x.Value >= filterWeight)
+            .Select(x => tilemap.CellToWorld(x.Key) + tilemap.cellSize / 2)
+            .ToList();
     }
 
     public Queue<Vector2> GetPath(Vector2 startingPosition)

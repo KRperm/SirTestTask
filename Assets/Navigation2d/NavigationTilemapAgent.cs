@@ -8,7 +8,7 @@ public class NavigationTilemapAgent : MonoBehaviour
     public float pointReachedRadius;
     public Rigidbody2D rigidBody2D;
 
-    private Queue<Vector2> Path { get; set; } = new Queue<Vector2>();
+    private Queue<Vector2> Path { get; set; }
     private NavigationTilemapService NavigationService { get; set; }
 
     private void Start()
@@ -18,6 +18,7 @@ public class NavigationTilemapAgent : MonoBehaviour
         NavigationService = FindObjectOfType<NavigationTilemapService>();
         Assert.IsNotNull(NavigationService);
         NavigationService.PathUpdated += NavigationService_PathUpdated;
+        Path = NavigationService.GetPath(transform.position);
     }
 
     private void OnDestroy()
