@@ -6,9 +6,10 @@ using UnityEngine.Events;
 
 public abstract class CharacterBase : MonoBehaviour
 {
+    public event EventHandler Died;
     public HealthPointsChangedEvent healthPointsChanged;
 
-    public float healthPoints;
+    public float maxHealthPoints;
     public float speed;
 
     public float delayBetweenShots;
@@ -17,10 +18,13 @@ public abstract class CharacterBase : MonoBehaviour
 
     public GameObject projectilePrefab;
 
+    private float HealthPoints { get; set; }
+
     protected virtual void Start()
     {
         Assert.IsNotNull(projectilePrefab);
-        healthPointsChanged.Invoke(healthPoints);
+        HealthPoints = maxHealthPoints;
+        healthPointsChanged.Invoke(HealthPoints);
         StartCoroutine(ContinuousShooting());
     }
 
@@ -31,12 +35,12 @@ public abstract class CharacterBase : MonoBehaviour
 
     public void RecieveDamage(float damageAmount)
     {
-        print(damageAmount);
-        healthPoints = Mathf.Max(healthPoints - damageAmount, 0);
-        healthPointsChanged.Invoke(healthPoints);
-        if (healthPoints <= 0)
+        HealthPoints = Mathf.Max(HealthPoints - damageAmount, 0);
+        healthPointsChanged.Invoke(HealthPoints);
+        if (HealthPoints <= 0)
         {
             OnDeath();
+            Died?.Invoke(this, EventArgs.Empty);
             Destroy(gameObject);
         }
     }
@@ -64,10 +68,8 @@ public abstract class CharacterBase : MonoBehaviour
             yield return new WaitUntil(CanShoot);
 
             var target = GetShootTarget();
-            if (target == null)
-                break;
-
-            SpawnProjectile(target.transform.position);
+            if (target != null)
+                SpawnProjectile(target.transform.position);
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -30,7 +31,18 @@ public abstract class EnemyBase : CharacterBase
 
     protected override GameObject GetShootTarget()
     {
-        return GameObject.FindWithTag("Player");
+        var player = GameObject.FindWithTag("Player");
+        if (player == null)
+            return null;
+
+        var directionToPlayer = (player.transform.position - transform.position).normalized;
+        var raycastPosition = Vector2.MoveTowards(transform.position, player.transform.position, projectileSpawnDistance); ;
+        var raycastMask = LayerMask.GetMask("Ground Entity", "Air Entity", "Player");
+        var hitResult = Physics2D.Raycast(raycastPosition, directionToPlayer, float.PositiveInfinity, raycastMask);
+        if (hitResult.collider == null || !hitResult.collider.CompareTag("Player"))
+            return null;
+
+        return player;
     }
 
     protected override bool CanShoot()
