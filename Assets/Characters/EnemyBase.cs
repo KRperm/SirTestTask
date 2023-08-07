@@ -32,17 +32,7 @@ public abstract class EnemyBase : CharacterBase
     protected override GameObject GetShootTarget()
     {
         var player = GameObject.FindWithTag("Player");
-        if (player == null)
-            return null;
-
-        var directionToPlayer = (player.transform.position - transform.position).normalized;
-        var raycastPosition = Vector2.MoveTowards(transform.position, player.transform.position, projectileSpawnDistance); ;
-        var raycastMask = LayerMask.GetMask("Ground Entity", "Air Entity", "Player");
-        var hitResult = Physics2D.Raycast(raycastPosition, directionToPlayer, float.PositiveInfinity, raycastMask);
-        if (hitResult.collider == null || !hitResult.collider.CompareTag("Player"))
-            return null;
-
-        return player;
+        return CanSeePlayer() ? player : null;
     }
 
     protected override bool CanShoot()
@@ -55,6 +45,18 @@ public abstract class EnemyBase : CharacterBase
         var player = GameObject.FindWithTag("Player");
         var playerController = player?.GetComponent<PlayerController>();
         playerController.RecieveCoins(coinsAward);
+    }
+
+    protected bool CanSeePlayer()
+    {
+        var player = GameObject.FindWithTag("Player");
+        if (player == null)
+            return false;
+        var directionToPlayer = (player.transform.position - transform.position).normalized;
+        var raycastPosition = Vector2.MoveTowards(transform.position, player.transform.position, projectileSpawnDistance); ;
+        var raycastMask = LayerMask.GetMask("Ground Entity", "Air Entity", "Player");
+        var hitResult = Physics2D.Raycast(raycastPosition, directionToPlayer, float.PositiveInfinity, raycastMask);
+        return hitResult.collider != null && hitResult.collider.CompareTag("Player");
     }
 
     private IEnumerator ContinuousMoving()

@@ -3,22 +3,18 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
-[RequireComponent(typeof(RectTransform))]
 public class JoystickController : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
     public JoystickMovedEvent joystickMoved;
     public RectTransform lever;
-
-    private RectTransform RectTransform { get; set; }
-    private float JoystickRadius { get; set; }
+    public RectTransform joystickRectTransform;
 
     private void Start()
     {
         Assert.IsNotNull(lever);
-        RectTransform = GetComponent<RectTransform>();
-        Assert.IsNotNull(RectTransform);
-        JoystickRadius = RectTransform.rect.width / 2;
+        Assert.IsNotNull(joystickRectTransform);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -33,14 +29,17 @@ public class JoystickController : MonoBehaviour, IDragHandler, IPointerDownHandl
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        SetLeverPosition(RectTransform.position);
+        SetLeverPosition(joystickRectTransform.position);
     }
 
     private void SetLeverPosition(Vector2 newPosition)
     {
-        lever.position = Vector2.MoveTowards(RectTransform.position, newPosition, JoystickRadius);
-        var joystickPosition = lever.localPosition / JoystickRadius;
+        lever.position = newPosition;
+        var joystickRadius = joystickRectTransform.rect.width / 2;
+        lever.localPosition = Vector2.ClampMagnitude(lever.localPosition, joystickRadius);
+        var joystickPosition = lever.localPosition / joystickRadius;
         joystickMoved.Invoke(joystickPosition);
+        print(joystickPosition);
     }
 }
 
