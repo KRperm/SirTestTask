@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class JoystickController : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
@@ -39,7 +38,6 @@ public class JoystickController : MonoBehaviour, IDragHandler, IPointerDownHandl
         lever.localPosition = Vector2.ClampMagnitude(lever.localPosition, joystickRadius);
         var joystickPosition = lever.localPosition / joystickRadius;
         joystickMoved.Invoke(joystickPosition);
-        print(joystickPosition);
     }
 }
 

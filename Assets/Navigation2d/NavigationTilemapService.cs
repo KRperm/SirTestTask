@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -50,13 +49,17 @@ public class NavigationTilemapService : MonoBehaviour
     {
         var path = new Queue<Vector2>();
         var currentTilePosition = tilemap.WorldToCell(startingPosition);
+        if (GetTileWeight(currentTilePosition) == int.MaxValue)
+            return path;
 
-        while(GetTileWeight(currentTilePosition) > 0)
+        for(var i = 0; i < maxWaves; i++)
         {
             var nextTilePosition = GetNeighboringTileWithLeastWeight(currentTilePosition);
             var nextPosition = tilemap.CellToWorld(nextTilePosition) + tilemap.cellSize / 2;
             path.Enqueue(nextPosition);
             currentTilePosition = nextTilePosition;
+            if (GetTileWeight(currentTilePosition) == 0)
+                break;
         }
 
         return path;

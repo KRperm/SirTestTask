@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Tilemaps;
 
 public class CameraFitter : MonoBehaviour
 {
@@ -11,7 +10,7 @@ public class CameraFitter : MonoBehaviour
     {
         Assert.IsNotNull(targetCamera);
         Assert.IsNotNull(objectToFit);
-        targetCamera.transform.position = objectToFit.bounds.center - Vector3.forward * 10;        
+        targetCamera.transform.position = objectToFit.bounds.center - Vector3.forward * 10;      
     }
 
     private void Update()
