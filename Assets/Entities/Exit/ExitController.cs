@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Events;
 
 public class ExitController : MonoBehaviour
 {
+    public UnityEvent exitReached;
+
     public Color closedColor;
     public Color openedColor;
 
@@ -26,10 +29,7 @@ public class ExitController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            print("exited");
-            // a
-        }
+        if (collision.gameObject.CompareTag("Player") && enabled)
+            exitReached.Invoke();
     }
 }

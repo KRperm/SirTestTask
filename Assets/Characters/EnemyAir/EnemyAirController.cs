@@ -13,17 +13,13 @@ public class EnemyAirController : EnemyBase
 
     private void FixedUpdate()
     {
-        if (!IsTraveling)
+        var player = GameObject.FindWithTag("Player");
+        if (!IsTraveling || player == null)
         {
             rigidBody2D.velocity = Vector2.zero;
             return;
         }
-
-        var player = GameObject.FindWithTag("Player");
-        if (player != null)
-        {
-            var direction = (player.transform.position - transform.position).normalized;
-            rigidBody2D.velocity = direction * speed * Time.deltaTime;
-        }
+        var direction = (player.transform.position - transform.position).normalized;
+        rigidBody2D.velocity = direction * speed * Time.deltaTime;
     }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour
 {
@@ -17,13 +18,17 @@ public class LevelController : MonoBehaviour
         var enemyControllers = FindObjectsOfType<EnemyBase>();
         EnemyCount = enemyControllers.Length;
         foreach (var enemyController in enemyControllers)
-            enemyController.Died += EnemyController_Died;
+            enemyController.died.AddListener(EnemyController_Died);
     }
 
-    private void EnemyController_Died(object sender, System.EventArgs e)
+    public void RestartLevel()
     {
-        if (sender is EnemyBase enemyController)
-            enemyController.Died -= EnemyController_Died;
+        var sceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(sceneName);
+    }
+
+    private void EnemyController_Died()
+    {
         EnemyCount--;
         if (EnemyCount == 0)
             enemiesDefeated.Invoke();

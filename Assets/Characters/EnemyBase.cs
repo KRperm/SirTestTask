@@ -50,6 +50,13 @@ public abstract class EnemyBase : CharacterBase
         return !IsTraveling;
     }
 
+    protected override void OnDeath()
+    {
+        var player = GameObject.FindWithTag("Player");
+        var playerController = player?.GetComponent<PlayerController>();
+        playerController.RecieveCoins(coinsAward);
+    }
+
     private IEnumerator ContinuousMoving()
     {
         while (true)

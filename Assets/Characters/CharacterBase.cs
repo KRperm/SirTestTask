@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public abstract class CharacterBase : MonoBehaviour
 {
-    public event EventHandler Died;
+    public UnityEvent died;
     public HealthPointsChangedEvent healthPointsChanged;
 
     public float maxHealthPoints;
@@ -40,7 +40,7 @@ public abstract class CharacterBase : MonoBehaviour
         if (HealthPoints <= 0)
         {
             OnDeath();
-            Died?.Invoke(this, EventArgs.Empty);
+            died.Invoke();
             Destroy(gameObject);
         }
     }

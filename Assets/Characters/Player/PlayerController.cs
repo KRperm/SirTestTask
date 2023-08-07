@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Events;
@@ -17,6 +18,19 @@ public class PlayerController : CharacterBase
         Assert.IsNotNull(rigidBody2d);
         coinsChangedEvent.Invoke(coins);
         base.Start();
+    }
+
+    private void Update()
+    {
+        Vector2 lookDirection = MovementDirection;
+        if (lookDirection == Vector2.zero)
+        {
+            var enemy = GetShootTarget();
+            if (enemy != null)
+                lookDirection = (enemy.transform.position - transform.position).normalized;
+        }
+        if (lookDirection != Vector2.zero)
+            rigidBody2d.SetRotation(Vector2.SignedAngle(Vector2.right, lookDirection));
     }
 
     private void FixedUpdate()

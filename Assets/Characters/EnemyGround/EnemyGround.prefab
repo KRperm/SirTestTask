@@ -48,17 +48,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ecf8bc370f67b45b7952dfd8b473eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  died:
+    m_PersistentCalls:
+      m_Calls: []
   healthPointsChanged:
     m_PersistentCalls:
       m_Calls: []
-  healthPoints: 50
-  speed: 100
+  maxHealthPoints: 40
+  speed: 500
   delayBetweenShots: 2
   projectileDamage: 10
   projectileSpawnDistance: 1.5
   projectilePrefab: {fileID: 5241964608778774924, guid: 183a7d0f012108f4b9d4735d0125b45b, type: 3}
   coinsAward: 4
-  travelDistance: 4.5
+  travelDistance: 7
   stopDuration: 3
   touchDamagePerSecond: 40
   odometer: {fileID: 2107044930986553485}
@@ -123,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  pointReachedRadius: 0.05
+  pointReachedRadius: 0.1
   rigidBody2D: {fileID: 8209179890025886610}
 --- !u!114 &2107044930986553485
 MonoBehaviour:

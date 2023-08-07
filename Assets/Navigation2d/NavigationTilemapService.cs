@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Events;
 using UnityEngine.Tilemaps;
 
 public class NavigationTilemapService : MonoBehaviour
 {
-    public event EventHandler PathUpdated;
+    public UnityEvent pathUpdated;
 
     public GameObject goal;
     public Tilemap tilemap;
@@ -24,7 +25,7 @@ public class NavigationTilemapService : MonoBehaviour
         RunPathfinding(GoalCellPosition);
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (goal == null)
             return;
@@ -99,7 +100,7 @@ public class NavigationTilemapService : MonoBehaviour
             if (beforeWaveTileCount == TileWeightTable.Count)
                 break;
         }
-        PathUpdated?.Invoke(this, EventArgs.Empty);
+        pathUpdated.Invoke();
     }
 
     private void SetTileWeightWave(Vector3Int[] cellPositions, int weight)

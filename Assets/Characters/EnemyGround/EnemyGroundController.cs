@@ -14,13 +14,6 @@ public class EnemyGroundController : EnemyBase
 
     private void Update()
     {
-        navigationAgent.enabled = IsTraveling;
-    }
-
-    protected override void OnDeath()
-    {
-        var player = GameObject.FindWithTag("Player");
-        var playerController = player?.GetComponent<PlayerController>();
-        playerController.RecieveCoins(coinsAward);       
+        navigationAgent.isNavigationEnabled = IsTraveling;
     }
 }

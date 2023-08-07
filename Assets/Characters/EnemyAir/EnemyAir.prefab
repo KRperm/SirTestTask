@@ -129,11 +129,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9afa935d5a43c354093dd70bb80baa74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  died:
+    m_PersistentCalls:
+      m_Calls: []
   healthPointsChanged:
     m_PersistentCalls:
       m_Calls: []
-  healthPoints: 100
-  speed: 100
+  maxHealthPoints: 20
+  speed: 200
   delayBetweenShots: 3
   projectileDamage: 10
   projectileSpawnDistance: 1.5
